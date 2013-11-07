@@ -4,7 +4,7 @@ from os import path
 import random
 
 REPO_URL = "https://github.com/sjakobi/test-driven-django.git"
-SITES_FOLDER = "/home/simon/sites"
+SITES_FOLDER = "/home/ubuntu/sites"
 
 def deploy():
     _create_directory_structure_if_necessary(env.host)
@@ -18,7 +18,7 @@ def deploy():
 def _create_directory_structure_if_necessary(site_name):
     base_folder = path.join(SITES_FOLDER, site_name)
     run("mkdir -p %s" % base_folder)
-    for subfolder in ("database", "static", "virtualevn", "source"):
+    for subfolder in ("database", "static", "virtualenv", "source"):
         run("mkdir -p %s/%s" % (base_folder, subfolder))
 
 def _get_latest_source(source_folder):
@@ -52,7 +52,7 @@ def _update_static_files(source_folder):
         source_folder))
 
 def _update_database(source_folder):
-    run("cd %s && ../virtualenv/bin/python3 manage.py syncdb -- noinput" % (
+    run("cd %s && ../virtualenv/bin/python3 manage.py syncdb --noinput" % (
         source_folder))
 
 
